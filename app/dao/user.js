@@ -199,6 +199,7 @@ class UserDao {
     let transaction;
     try {
       transaction = await sequelize.transaction();
+      
       const user = {
         username: v.get('body.username')
       };

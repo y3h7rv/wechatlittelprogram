@@ -60,5 +60,12 @@
     "svg-captcha": "^1.4.0",
     "validator": "^13.7.0",
     "ws": "^7.4.4"
+  },
+  "bugs": {
+    "url": "https://github.com/TaleLin/lin-cms-koa/issues"
+  },
+  "homepage": "https://github.com/TaleLin/lin-cms-koa#readme",
+  "directories": {
+    "test": "test"
   }
 }

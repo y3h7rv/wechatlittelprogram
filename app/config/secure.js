@@ -2,7 +2,7 @@
 
 module.exports = {
   db: {
-    database: 'lin-cms',
+    database: 'treehole',
     host: 'localhost',
     dialect: 'mysql',
     port: 3306,
