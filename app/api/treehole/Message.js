@@ -1,6 +1,7 @@
 import { LinRouter, NotFound, disableLoading } from 'lin-mizar';
 import {  CreateMessageValidator} from '../../validator/treeholemessage.js';
 import { thmessageDao } from '../../dao/treeholemessage.js';
+import { MessageNotFound } from '../../lib/exception.js';
 
 // book 的红图实例
 const messageApi = new LinRouter({
@@ -32,7 +33,7 @@ const messageApi = new LinRouter({
     const v = await new messageSearchValidator().validate(ctx);
     const message = await thmessageDto.getMessageByuserid(v.get('query.q'));
     if (!message) {
-      throw new BookNotFound();
+      throw new MessageNotFound();
     }
     ctx.json(book);
   });
