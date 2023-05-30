@@ -17,5 +17,39 @@ class thmessageDao{
     const messages = await Message.findAll();
     return messages;
   }
+  async getMessageByuserid (v) {
+    const message = await Message.findAll({
+      where: {
+        user_id:v
+      }
+    });
+    return message;
+  }
+  async do_like(v){
+    const message=await Message.findOne({
+      where:{
+        user_id:v.get('body.user_id'),
+        id:v.get('body.id')
+      }
+    });
+    message.total_likes=message.total_likes+1;
+    await message.save();
+    return message;
+  }
+  async deleteMessage (v) {
+    const message = await Message.findOne({
+      where: {
+        id:v.get('body.id'),
+        user_id:v.get('body.user_id')
+      }
+    });
+    if (!message) {
+      throw new NotFound({
+        code: 10022,
+      });
+    }
+    message.destroy();
+  }
+
 }
 export{thmessageDao};

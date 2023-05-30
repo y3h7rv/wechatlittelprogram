@@ -1,4 +1,4 @@
-import { LinValidator, Rule } from 'lin-mizar';
+import { Lin, LinValidator, Rule } from 'lin-mizar';
 
 class CreateMessageValidator extends LinValidator {
   constructor () {
@@ -11,5 +11,24 @@ class CreateMessageValidator extends LinValidator {
     this.send_timestamp=new Rule('isNotEmpty', {code:1,msg:'参数不足：send_timestamp'});
   }
 }
+class messageSearchValidator extends LinValidator{
+  constructor(){
+    super();
+this.user_id=new Rule('isNotEmpty',{code:1,msg:'参数不足：user_id'})
+  }
+}
+class do_likeValidator extends LinValidator{
+  constructor(){
+    super();
+    this.user_id=new Rule('isNotEmpty',{code:1,msg:'参数不足：user_id'});
+    this.id=new Rule('isNotEmpty',{code:1,msg:'参数不足：message_id'})
 
-export { CreateMessageValidator };
+  }
+}
+class parameterValidator extends LinValidator{
+  constructor(){
+    super();
+    this.user_id=new Rule('isNotEmpty',{code:1,msg:'参数不足：user_id'});
+    this.id=new Rule('isNotEmpty',{code:1,msg:'参数不足：message_id'})  }
+}
+export { CreateMessageValidator , messageSearchValidator,do_likeValidator,parameterValidator};

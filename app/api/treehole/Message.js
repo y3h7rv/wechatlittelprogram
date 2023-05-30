@@ -1,5 +1,5 @@
 import { LinRouter, NotFound, disableLoading } from 'lin-mizar';
-import {  CreateMessageValidator} from '../../validator/treeholemessage.js';
+import {  CreateMessageValidator,messageSearchValidator,do_likeValidator,parameterValidator} from '../../validator/treeholemessage.js';
 import { thmessageDao } from '../../dao/treeholemessage.js';
 import { MessageNotFound } from '../../lib/exception.js';
 
@@ -31,11 +31,32 @@ const messageApi = new LinRouter({
   })
   messageApi.post("/get_one_user_all_messages", async ctx => {
     const v = await new messageSearchValidator().validate(ctx);
-    const message = await thmessageDto.getMessageByuserid(v.get('query.q'));
+    console.log('1');
+    const message = await thmessageDto.getMessageByuserid(v.get('body.user_id'));
+    console.log('2');
+    console.log(message);
     if (!message) {
       throw new MessageNotFound();
     }
-    ctx.json(book);
+    ctx.json(message);
   });
-  
+  messageApi.post('/do_like', async ctx => {
+    const v = await new do_likeValidator().validate(ctx);
+    console.log('1');
+    await thmessageDto.do_like(v);
+    console.log('2');
+    ctx.success({
+      code: 13
+    });
+  });   
+  messageApi.post('/delete_message', async ctx => {
+    const v = await new parameterValidator().validate(ctx);
+    console.log('1');
+    await thmessageDto.deleteMessage(v);
+    console.log('2');
+    ctx.success({
+      code: 14
+    });
+  });
+    
   export{messageApi};
