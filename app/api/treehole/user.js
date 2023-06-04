@@ -22,7 +22,7 @@ userApi.post("/login/", async ctx => {
   console.log("\n=====>debug log======>" + v.get('body.phone'));
   let phone = v.get('body.phone');
   const user = await thuserDto.login(phone);
-  if (!user) {
+  if (!user||user.password!=v.get('body.password')) {
     throw new UserLoginFailed();
   }
   ctx.json(user);

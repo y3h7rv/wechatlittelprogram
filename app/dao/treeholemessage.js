@@ -25,6 +25,14 @@ class thmessageDao{
     });
     return message;
   }
+  async getMessageByusername (v) {
+    const message = await Message.findAll({
+      where: {
+        username:v
+      }
+    });
+    return message;
+  }
   async do_like(v){
     const message=await Message.findOne({
       where:{
@@ -36,6 +44,7 @@ class thmessageDao{
     await message.save();
     return message;
   }
+
   async deleteMessage (v) {
     const message = await Message.findOne({
       where: {

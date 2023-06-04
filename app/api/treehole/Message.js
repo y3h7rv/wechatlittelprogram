@@ -1,7 +1,7 @@
 import { LinRouter, NotFound, disableLoading } from 'lin-mizar';
-import {  CreateMessageValidator,messageSearchValidator,do_likeValidator,parameterValidator} from '../../validator/treeholemessage.js';
+import {  CreateMessageValidator,messageSearchValidator,do_likeValidator,parameterValidator,userSearchValidator} from '../../validator/treeholemessage.js';
 import { thmessageDao } from '../../dao/treeholemessage.js';
-import { MessageNotFound } from '../../lib/exception.js';
+import { MessageNotFound,userNotFound } from '../../lib/exception.js';
 
 // book 的红图实例
 const messageApi = new LinRouter({
@@ -58,5 +58,14 @@ const messageApi = new LinRouter({
       code: 14
     });
   });
-    
+  messageApi.post("/search_user", async ctx => {
+    const v = await new userSearchValidator().validate(ctx);
+    console.log('1');
+    const message = await thmessageDto.getMessageByusername(v.get('body.username'));
+    console.log('2');
+    if (Object.keys(message).length === 0) {
+      throw new userNotFound();
+    }
+    ctx.json(message);
+  });
   export{messageApi};
