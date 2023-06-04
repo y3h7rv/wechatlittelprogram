@@ -32,7 +32,7 @@ const messageApi = new LinRouter({
   messageApi.post("/get_one_user_all_messages", async ctx => {
     const v = await new messageSearchValidator().validate(ctx);
     console.log('1');
-    const message = await thmessageDto.getMessageByuserid(v.get('body.username'));
+    const message = await thmessageDto.getMessageByuserid(v.get('body.user_id'));
     console.log('2');
     console.log(message);
     if (!message) {
@@ -46,7 +46,7 @@ const messageApi = new LinRouter({
     await thmessageDto.do_like(v);
     console.log('2');
     ctx.success({
-      code: 13
+      code: 16
     });
   });   
   messageApi.post('/delete_message', async ctx => {

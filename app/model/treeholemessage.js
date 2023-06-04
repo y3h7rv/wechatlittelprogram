@@ -7,7 +7,7 @@ class Message extends Model{
         const origin = {
           id: this.id,
           user_id: this.user_id,
-          username: this.title,
+          username: this.username,
           face_url: this.face_url,
           content: this.content,
           total_likes:this.total_likes,

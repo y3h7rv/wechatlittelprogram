@@ -14,7 +14,7 @@ class CreateMessageValidator extends LinValidator {
 class messageSearchValidator extends LinValidator{
   constructor(){
     super();
-this.username=new Rule('isNotEmpty',{code:1,msg:'参数不足：username'})
+this.user_id=new Rule('isNotEmpty',{code:1,msg:'参数不足：user_id'})
   }
 }
 class do_likeValidator extends LinValidator{

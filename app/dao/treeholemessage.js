@@ -20,7 +20,7 @@ class thmessageDao{
   async getMessageByuserid (v) {
     const message = await Message.findAll({
       where: {
-        username:v
+        user_id:v
       }
     });
     return message;
