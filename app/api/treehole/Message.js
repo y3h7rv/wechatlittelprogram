@@ -32,7 +32,7 @@ const messageApi = new LinRouter({
   messageApi.post("/get_one_user_all_messages", async ctx => {
     const v = await new messageSearchValidator().validate(ctx);
     console.log('1');
-    const message = await thmessageDto.getMessageByuserid(v.get('body.user_id'));
+    const message = await thmessageDto.getMessageByuserid(v.get('body.username'));
     console.log('2');
     console.log(message);
     if (!message) {
